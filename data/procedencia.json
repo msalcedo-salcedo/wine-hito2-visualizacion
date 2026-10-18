@@ -1,0 +1,31 @@
+{
+  "wine": {
+    "source": "https://archive.ics.uci.edu/dataset/109/wine",
+    "license": "CC BY 4.0",
+    "unit": "Una fila por muestra química; 178 muestras y 13 mediciones. Tres cultivares sin nombre. Sin fechas ni geolocalización individual.",
+    "original": "wine.data, wine.names conservados del Hito1"
+  },
+  "oiv": {
+    "source": "https://www.oiv.int/sites/default/files/documents/OIV_Statistical_Brief-Wine_Table_Grapes_and_Dried_Grapes_in_2024_0.pdf",
+    "citation": "OIV (2025, septiembre). OIV Statistical Brief: Wine, Table Grapes & Dried Grapes in 2024. Tabla 15, página 14.",
+    "unit": "País-año; producción de vino excluidos mostos y jugos, millones de hectolitros (mhl).",
+    "method": "Transcripción de 12 filas × 10 años; ISO3 asignados a los 10 países nombrados. Mundo y Otros no son países y no se mapean. Verificación visual contra tabla 15.",
+    "rounding": "0,1 mhl; sumas pueden diferir del total mundial por redondeo. La fuente distingue estimaciones; esta transcripción no conserva tipografía de estimación, por lo que todos los valores se tratan como cifras publicadas revisables.",
+    "join": "No hay clave con Wine. Tablas independientes; no se asignan países ni fechas a las muestras."
+  },
+  "accessed": "2026-10-18",
+  "seed": 42,
+  "bootstrap_resamples": 5000,
+  "sha256": {
+    "oiv_produccion_2015_2024.csv": "4945e102a3b51f3140fcd6780a23ee56c2c699d87665c1f0c913ba31537b862f",
+    "wine.data": "6be6b1203f3d51df0b553a70e57b8a723cd405683958204f96d23d7cd6aea659",
+    "wine.names": "f1b84f2ef845e0bdebf13e14fa7a213e56de4f1baa40c5974dbd1ee51c5ae710",
+    "paises_natural_earth.geojson": "d2aec98bfd1ffda2d8adea42b7ec473365eef38defc48e83afb7d58ae60bfe7c"
+  },
+  "geometria": {
+    "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson",
+    "license": "Public domain / Natural Earth",
+    "scale": "1:110m",
+    "key": "ADM0_A3"
+  }
+}

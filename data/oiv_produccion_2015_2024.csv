@@ -1,0 +1,121 @@
+pais,iso3,anio,produccion_mhl
+Italia,ITA,2015,50.0
+Italia,ITA,2016,50.9
+Italia,ITA,2017,42.5
+Italia,ITA,2018,54.8
+Italia,ITA,2019,47.5
+Italia,ITA,2020,49.1
+Italia,ITA,2021,50.2
+Italia,ITA,2022,49.8
+Italia,ITA,2023,38.3
+Italia,ITA,2024,44.1
+Francia,FRA,2015,47.8
+Francia,FRA,2016,45.4
+Francia,FRA,2017,36.6
+Francia,FRA,2018,49.2
+Francia,FRA,2019,42.2
+Francia,FRA,2020,46.7
+Francia,FRA,2021,37.6
+Francia,FRA,2022,46.0
+Francia,FRA,2023,47.3
+Francia,FRA,2024,36.5
+España,ESP,2015,37.7
+España,ESP,2016,40.0
+España,ESP,2017,32.5
+España,ESP,2018,44.9
+España,ESP,2019,33.7
+España,ESP,2020,40.9
+España,ESP,2021,35.5
+España,ESP,2022,36.0
+España,ESP,2023,28.4
+España,ESP,2024,31.0
+Estados Unidos,USA,2015,24.0
+Estados Unidos,USA,2016,26.1
+Estados Unidos,USA,2017,25.7
+Estados Unidos,USA,2018,27.4
+Estados Unidos,USA,2019,26.8
+Estados Unidos,USA,2020,23.9
+Estados Unidos,USA,2021,25.3
+Estados Unidos,USA,2022,23.5
+Estados Unidos,USA,2023,25.5
+Estados Unidos,USA,2024,21.1
+Argentina,ARG,2015,13.4
+Argentina,ARG,2016,9.4
+Argentina,ARG,2017,11.8
+Argentina,ARG,2018,14.5
+Argentina,ARG,2019,13.0
+Argentina,ARG,2020,10.8
+Argentina,ARG,2021,12.5
+Argentina,ARG,2022,11.5
+Argentina,ARG,2023,8.8
+Argentina,ARG,2024,10.9
+Australia,AUS,2015,11.9
+Australia,AUS,2016,13.1
+Australia,AUS,2017,13.7
+Australia,AUS,2018,12.7
+Australia,AUS,2019,12.0
+Australia,AUS,2020,10.9
+Australia,AUS,2021,14.8
+Australia,AUS,2022,13.1
+Australia,AUS,2023,9.6
+Australia,AUS,2024,10.4
+Chile,CHL,2015,12.9
+Chile,CHL,2016,10.1
+Chile,CHL,2017,9.5
+Chile,CHL,2018,12.9
+Chile,CHL,2019,11.9
+Chile,CHL,2020,10.3
+Chile,CHL,2021,13.4
+Chile,CHL,2022,12.4
+Chile,CHL,2023,11.0
+Chile,CHL,2024,9.3
+Sudáfrica,ZAF,2015,11.2
+Sudáfrica,ZAF,2016,10.5
+Sudáfrica,ZAF,2017,10.8
+Sudáfrica,ZAF,2018,9.5
+Sudáfrica,ZAF,2019,9.7
+Sudáfrica,ZAF,2020,10.4
+Sudáfrica,ZAF,2021,10.8
+Sudáfrica,ZAF,2022,10.3
+Sudáfrica,ZAF,2023,9.3
+Sudáfrica,ZAF,2024,8.5
+Alemania,DEU,2015,8.8
+Alemania,DEU,2016,9.0
+Alemania,DEU,2017,7.5
+Alemania,DEU,2018,10.3
+Alemania,DEU,2019,8.2
+Alemania,DEU,2020,8.4
+Alemania,DEU,2021,8.4
+Alemania,DEU,2022,8.9
+Alemania,DEU,2023,8.6
+Alemania,DEU,2024,7.8
+Portugal,PRT,2015,7.0
+Portugal,PRT,2016,6.0
+Portugal,PRT,2017,6.7
+Portugal,PRT,2018,6.1
+Portugal,PRT,2019,6.5
+Portugal,PRT,2020,6.4
+Portugal,PRT,2021,7.4
+Portugal,PRT,2022,6.8
+Portugal,PRT,2023,7.5
+Portugal,PRT,2024,6.9
+Otros países,,2015,53.6
+Otros países,,2016,51.3
+Otros países,,2017,52.4
+Otros países,,2018,54.0
+Otros países,,2019,47.5
+Otros países,,2020,45.2
+Otros países,,2021,44.8
+Otros países,,2022,45.4
+Otros países,,2023,43.0
+Otros países,,2024,39.1
+Mundo,,2015,278.3
+Mundo,,2016,271.9
+Mundo,,2017,249.7
+Mundo,,2018,296.3
+Mundo,,2019,259.1
+Mundo,,2020,263.0
+Mundo,,2021,260.8
+Mundo,,2022,263.8
+Mundo,,2023,237.3
+Mundo,,2024,225.6
