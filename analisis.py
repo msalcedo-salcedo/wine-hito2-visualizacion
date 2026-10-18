@@ -133,17 +133,32 @@ def chart_time(oiv, countries):
     fig.update_layout(legend_title_text='País')
     return fig
 
-def chart_map_altair(oiv, year=2024):
-    import altair as alt
+def chart_map_html(oiv, year=2024):
+    """Mapa SVG con proyección equirectangular y consulta nativa por país."""
     import json
+    from html import escape
     features=json.loads((ROOT/'data/paises_natural_earth.geojson').read_text(encoding='utf-8'))['features']
-    # Local GeoJSON prevents dependencies on external map tile services.
-    lookup=geo_data(oiv,year)
-    return (alt.Chart(alt.Data(values=features)).mark_geoshape(stroke='white',strokeWidth=.3)
-        .transform_lookup(lookup='properties.ADM0_A3',from_=alt.LookupData(lookup,'iso3',['pais','produccion_mhl','cambio_pct']))
-        .encode(shape=alt.Shape('geometry:G'),color=alt.condition('isValid(datum.cambio_pct)',alt.Color('cambio_pct:Q',title='Cambio (%)',scale=alt.Scale(domain=[-30,0,30],range=['#b2182b','#f7f7f7','#2166ac'],clamp=True)),alt.value('#dedede')),
-            tooltip=[alt.Tooltip('properties.ADMIN:N',title='Territorio'),alt.Tooltip('pais:N',title='País OIV'),alt.Tooltip('produccion_mhl:Q',title='Producción (mhl)',format='.1f'),alt.Tooltip('cambio_pct:Q',title='Cambio (%)',format='+.1f')])
-        .project(type='equalEarth').properties(title=f'Cambio {year-1}–{year} · producción de vino',height=420).configure_view(stroke=None))
+    lookup=geo_data(oiv,year).set_index('iso3')
+    parts=['<html><head><meta charset="utf-8"><style>body{margin:0;font:14px Arial;color:#292929}svg{width:100%;height:auto;max-height:470px}path:hover{stroke:#222;stroke-width:1.3px}path:focus{stroke:#111;stroke-width:2px;outline:none}</style></head><body>',
+        f'<svg viewBox="0 0 1000 470" role="img" aria-label="Cambio porcentual de producción de vino {year-1} a {year}. Diez países. Proyección equirectangular."><text x="18" y="25" font-size="18" font-weight="bold">Cambio {year-1}–{year} · producción de vino (%)</text>']
+    for f in features:
+        props=f['properties'];iso=props['ADM0_A3']
+        if iso=='ATA': continue
+        if iso in lookup.index:
+            row=lookup.loc[iso];value=float(row.cambio_pct);t=min(abs(value)/30,1)
+            white=(247,247,247);end=(178,24,43) if value<0 else (33,102,172)
+            color='#'+''.join(f'{round(a+(b-a)*t):02x}' for a,b in zip(white,end))
+            label=f'{row.pais}: {row.produccion_mhl:.1f} mhl; cambio {value:+.1f}%'
+        else:
+            color='#dedede';label=f'{props["ADMIN"]}: fuera de cobertura OIV de esta tabla'
+        geom=f['geometry'];polygons=[geom['coordinates']] if geom['type']=='Polygon' else geom['coordinates']
+        commands=[]
+        for polygon in polygons:
+            for ring in polygon:
+                commands.append('M'+' L'.join(f'{18+(lon+180)*2.48:.2f},{45+(90-lat)*2.18:.2f}' for lon,lat,*_ in ring)+' Z')
+        parts.append(f'<path data-iso="{escape(iso)}" tabindex="0" aria-label="{escape(label)}" d="{" ".join(commands)}" fill="{color}" fill-rule="evenodd" stroke="white" stroke-width=".35"><title>{escape(label)}</title></path>')
+    parts.append('<defs><linearGradient id="escala"><stop offset="0%" stop-color="#b2182b"/><stop offset="50%" stop-color="#f7f7f7"/><stop offset="100%" stop-color="#2166ac"/></linearGradient></defs><rect x="640" y="405" width="260" height="15" fill="url(#escala)"/><text x="635" y="439">−30%</text><text x="761" y="439">0</text><text x="875" y="439">+30%</text><text x="18" y="407" font-size="12">Gris: fuera de cobertura. Pase el cursor sobre un país.</text><text x="18" y="429" font-size="12">Natural Earth 1:110m · Proyección equirectangular: áreas distorsionadas.</text><text x="18" y="451" font-size="12">OIV, tabla 15 (septiembre 2025). Escala saturada fuera de ±30%.</text></svg></body></html>')
+    return ''.join(parts)
 
 def linked_panel(df):
     """Cuatro vistas Altair conectadas por selección de cultivar y pincel."""
