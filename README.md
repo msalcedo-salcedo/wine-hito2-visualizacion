@@ -6,6 +6,8 @@ Visualización de Datos, UPeU · Grupo 3 · 18 de octubre de 2026.
 
 El proyecto continúa el Hito1 Wine: tres cultivares, 178 muestras, 13 mediciones, seis KPI, decisiones D1–D5, preguntas Q1–Q6 y wireframe A. El notebook añade Q7–Q10, diez visualizaciones interpretadas, incertidumbre y un panel declarativo de cuatro vistas conectadas. La app Streamlit tiene una página de laboratorio con cuatro gráficos conectados por filtros y otra página de contexto con mapa y serie anual.
 
+El mapa SVG conserva los polígonos GeoJSON originales y permite consultar país, volumen y variación mediante tooltips. Usa proyección equirectangular identificada y datos locales; no depende de servicios de mapas ni de librerías JavaScript externas. El panel Altair HTML sí carga sus librerías desde CDN.
+
 Python 3.12 recomendado. Desde esta carpeta:
 
 ```bash
@@ -31,7 +33,7 @@ Abra `Hito2_Wine.ipynb` con Jupyter/VS Code y ejecute todas las celdas. Para ins
 
 Laboratorio: n válido; completitud de filas; duplicados adicionales; balance mínimo/máximo n; media de alcohol; mayor η². Filtros de cultivar múltiple y rango de alcohol actualizan todos los KPI y cuatro vistas: cobertura, relación alcohol/color, flavonoides e IC de la media. El denominador de completitud/duplicados son filas del alcance. Balance cuenta los grupos seleccionados aunque queden vacíos, y no aplica con menos de dos grupos seleccionados. η² no aplica con menos de dos grupos observados. Un alcance vacío muestra aviso, sin estimaciones ficticias.
 
-Contexto: producción mundial, cobertura de diez países y año comparado. Filtro de año para mapa (2016–2024) y selección de países en serie (2015–2024). Mapa Altair con polígonos locales Natural Earth y proyección Equal Earth; cambio anual porcentual, escala fija ±30% centrada en cero; gris significa fuera de cobertura. La figura impresa usa una proyección equirectangular identificada. La selección por región del panel HTML enlaza cuatro vistas adicionales.
+Contexto: producción mundial, cobertura de diez países y año comparado. Filtro de año para mapa (2016–2024) y selección de países en serie (2015–2024). Mapa SVG con polígonos locales Natural Earth y proyección equirectangular; cambio anual porcentual, escala fija ±30% centrada en cero; gris significa fuera de cobertura. La figura impresa usa una proyección equirectangular identificada. La selección por región del panel HTML enlaza cuatro vistas adicionales.
 
 ## Fuentes y límites
 
@@ -47,11 +49,13 @@ Bootstrap percentil: 5.000 remuestras dentro de cada cultivar; semilla 42 + índ
 
 Se mantienen calidad/cobertura primero, relación central y distribuciones/precisión después, paleta `#7B1E3A`, `#087F8C`, `#91670C`, etiquetas y símbolos redundantes. La página separada de contexto declara el cambio de granularidad. Barras desde cero, ejes comunes en small multiples, escala simétrica de correlación y de tasa geográfica. Controles etiquetados y descarga de detalle. No se afirma certificación WCAG.
 
+La versión del notebook en GitHub conserva todas las celdas y omite salidas pesadas. El informe, la copia ejecutada y las carpetas docs/evidencias forman parte del paquete del aula.
+
 ## Despliegue
 
 Repositorio: https://github.com/msalcedo-salcedo/wine-hito2-visualizacion
 
-URL pública Streamlit: pendiente de autenticación y verificación; se actualizará al completar el despliegue. No confundir el servidor local con una publicación.
+Aplicación pública verificada: https://wine-hito2-medalit.streamlit.app/ . Entorno de publicación: Python 3.12.
 
 Para desplegar en Streamlit Community Cloud: seleccionar este repositorio, rama `main`, archivo principal `app.py`, Python 3.12. No introducir secretos.
 

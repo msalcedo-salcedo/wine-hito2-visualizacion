@@ -4,6 +4,7 @@ import numpy as np
 from analisis import *
 
 def run():
+    (ROOT/'evidencias').mkdir(exist_ok=True)
     d=load_wine();o=load_oiv();k=metrics(d)
     assert d.shape==(178,16)
     assert d.cultivar.value_counts().reindex(GROUPS).tolist()==[59,71,48]
@@ -24,7 +25,9 @@ def run():
         g=o[o.anio==year];assert abs(g[g.pais!='Mundo'].produccion_mhl.sum()-g[g.pais=='Mundo'].produccion_mhl.iloc[0])<=.31
     for f in [chart_counts,chart_scatter,chart_box,chart_ci,chart_eta,chart_ecdf,chart_corr,chart_pca]: assert len(f(d).data)>0
     assert len(chart_map(o).data)>0 and len(chart_time(o,['Italia']).data)==1
-    assert chart_map_altair(o).to_dict()['projection']['type']=='equalEarth'
+    html=chart_map_html(o)
+    assert all(f'data-iso="{iso}"' in html for iso in geo_data(o).iso3)
+    assert 'Italia: 44.1 mhl; cambio +15.1%' in html
     spec=linked_panel(d).to_dict();assert len(spec['vconcat'])==2
     # Semantic AppTest executes both pages, filters, and empty cases.
     from streamlit.testing.v1 import AppTest
