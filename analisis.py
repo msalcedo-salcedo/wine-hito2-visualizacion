@@ -129,7 +129,9 @@ def chart_time(oiv, countries):
     d=oiv[oiv.pais.isin(countries)]
     fig=px.line(d,x='anio',y='produccion_mhl',color='pais',markers=True,labels=LABELS)
     fig.update_yaxes(rangemode='tozero');fig.update_xaxes(dtick=1)
-    return theme(fig,'Producción anual de vino · contexto OIV 2015–2024')
+    fig=theme(fig,'Producción anual de vino · contexto OIV 2015–2024')
+    fig.update_layout(legend_title_text='País')
+    return fig
 
 def chart_map_altair(oiv, year=2024):
     import altair as alt
@@ -139,7 +141,7 @@ def chart_map_altair(oiv, year=2024):
     lookup=geo_data(oiv,year)
     return (alt.Chart(alt.Data(values=features)).mark_geoshape(stroke='white',strokeWidth=.3)
         .transform_lookup(lookup='properties.ADM0_A3',from_=alt.LookupData(lookup,'iso3',['pais','produccion_mhl','cambio_pct']))
-        .encode(color=alt.condition('isValid(datum.cambio_pct)',alt.Color('cambio_pct:Q',title='Cambio (%)',scale=alt.Scale(domain=[-30,0,30],range=['#b2182b','#f7f7f7','#2166ac'],clamp=True)),alt.value('#dedede')),
+        .encode(shape=alt.Shape('geometry:G'),color=alt.condition('isValid(datum.cambio_pct)',alt.Color('cambio_pct:Q',title='Cambio (%)',scale=alt.Scale(domain=[-30,0,30],range=['#b2182b','#f7f7f7','#2166ac'],clamp=True)),alt.value('#dedede')),
             tooltip=[alt.Tooltip('properties.ADMIN:N',title='Territorio'),alt.Tooltip('pais:N',title='País OIV'),alt.Tooltip('produccion_mhl:Q',title='Producción (mhl)',format='.1f'),alt.Tooltip('cambio_pct:Q',title='Cambio (%)',format='+.1f')])
         .project(type='equalEarth').properties(title=f'Cambio {year-1}–{year} · producción de vino',height=420).configure_view(stroke=None))
 
