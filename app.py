@@ -1,6 +1,7 @@
 """Dashboard Hito 2: ejecutar con streamlit run app.py."""
 import numpy as np
 import streamlit as st
+import streamlit.components.v1 as components
 from analisis import *
 
 st.set_page_config(page_title='Wine | Hito 2',page_icon='🍇',layout='wide')
@@ -51,7 +52,9 @@ else:
     c1.metric('Producción mundial',f'{world:.1f} mhl')
     c2.metric('Cobertura de los 10 países',f'{100*geo.produccion_mhl.sum()/world:.1f}%')
     c3.metric('Año comparado',f'{year-1} → {year}')
-    st.altair_chart(chart_map_altair(oiv,year),use_container_width=True)
+    # Embed Vega-Lite JSON directly: Arrow conversion can flatten GeoJSON geometry.
+    map_html=chart_map_altair(oiv,year).properties(width='container').to_html(embed_options={'actions':False})
+    components.html(map_html,height=480,scrolling=False)
     st.caption('Coropleta de variación relativa con escala divergente fija ±30% centrada en cero; gris = países fuera de la tabla, no producción cero. Mhl = millones de hectolitros. Los valores del tooltip conservan la tasa sin recorte; la escala se satura fuera de ±30%.')
     if countries: st.plotly_chart(chart_time(oiv,countries),use_container_width=True)
     else: st.info('Seleccione al menos un país para mostrar la serie.')
